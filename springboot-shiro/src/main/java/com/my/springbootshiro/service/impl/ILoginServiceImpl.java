@@ -37,7 +37,6 @@ public class ILoginServiceImpl implements ILoginService {
         User user = userRepository.getOne(Integer.valueOf(map.get("userId").toString()));
         Role role = new Role();
         role.setRoleName(map.get("roleName").toString());
-        role.setUser(user);
         Permission permission1 = new Permission();
         permission1.setPermission("create");
         permission1.setRole(role);
