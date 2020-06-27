@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.my.springbootshiro.dao.IUserDAO" >
+    <sql id="field">
+        id,name,password
+    </sql>
+
+    <sql id="fieldAs">
+        id as id,
+        name as name,
+        password as password
+    </sql>
+
+    <sql id="property">
+        #{id,jdbcType=INTEGER},
+        #{name,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR}
+    </sql>
+
+    <insert id="insert" parameterType="com.my.springbootshiro.domain.User">
+        INSERT INTO ACCOUNT(<include refid="field" />) VALUES (<include refid="property" />)
+    </insert>
+
+    <resultMap type="com.my.springbootshiro.domain.User" id="fieldInclude_U_R_P">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <collection property="roles" ofType="com.my.springbootshiro.domain.Role" column="roleId">
+            <id column="roleId" property="roleId"/>
+            <result column="roleName" property="roleName"/>
+            <collection property="permissions" ofType="com.my.springbootshiro.domain.Permission" column="permissionId">
+                <id column="permissionId" property="permissionId"/>
+                <result column="permission" property="permission"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <!--通过id查询人员信息及权限-->
+    <select id="findUserPermissionById" resultMap="fieldInclude_U_R_P" parameterType="String">
+        SELECT
+            U.ID AS id,
+            U.`NAME` AS name,
+            U.`PASSWORD` AS password,
+            R.ID AS roleId,
+            R.ROLE_NAME AS roleName,
+            P.ID AS permissionId,
+            P.PERMISSION AS permission
+        FROM USER U
+        LEFT JOIN ROLE R ON U.ID = R.USER_ID
+        LEFT JOIN PERMISSION P ON R.ID = P.ROLE_ID
+        WHERE U.NAME = #{name}
+    </select>
+</mapper>

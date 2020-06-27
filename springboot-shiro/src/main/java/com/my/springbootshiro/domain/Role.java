@@ -15,6 +15,6 @@ public class Role {
     private String roleName;
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.EAGER)
     private List<Permission> permissions;
 }

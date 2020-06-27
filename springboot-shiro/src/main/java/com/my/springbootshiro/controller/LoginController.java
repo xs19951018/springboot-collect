@@ -56,15 +56,13 @@ public class LoginController {
     // 数据初始化
     @RequestMapping(value = "/addUser")
     public String addUser(@RequestBody Map<String,Object> map){
-        User user = loginService.addUser(map);
-        return "addUser is ok! \n" + user;
+        return "addUser is ok! \n";
     }
 
     // 角色初始化
     @RequestMapping(value = "/addRole")
     public String addRole(@RequestBody Map<String,Object> map){
-        Role role = loginService.addRole(map);
-        return "addRole is ok! \n" + role;
+        return "addRole is ok! \n";
     }
 
     // 注解的使用
@@ -75,6 +73,7 @@ public class LoginController {
         return "Create success!";
     }
 
+    @RequiresRoles("admin")
     @RequestMapping(value = "/test")
     public String test(){
         return "test!";
