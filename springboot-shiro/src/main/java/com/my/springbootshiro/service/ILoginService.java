@@ -9,4 +9,10 @@ public interface ILoginService {
 
     User findByName(String name);
 
+    /**
+     * 注册
+     * @param user
+     * @return
+     */
+    Integer register(User user);
 }

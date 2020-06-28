@@ -1,6 +1,5 @@
 package com.my.springbootshiro.controller;
 
-import com.my.springbootshiro.domain.Role;
 import com.my.springbootshiro.domain.User;
 import com.my.springbootshiro.service.ILoginService;
 import org.apache.shiro.SecurityUtils;
@@ -36,36 +35,29 @@ public class LoginController {
         return "login";
     }
 
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public String register(@Param("user") User user){
+        String msg = null;
+        Integer count = loginService.register(user);
+        msg = count == 1 ? "register ok!" : "register false!";
+        return msg;
+    }
+
     @RequestMapping(value = "/index")
     public String index(){
         return "index";
     }
 
-    // 登出
     @RequestMapping(value = "/logout")
     public String logout(){
         return "logout";
     }
 
-    // 错误页面展示
     @RequestMapping(value = "/error",method = RequestMethod.POST)
     public String error(){
         return "error ok!";
     }
 
-    // 数据初始化
-    @RequestMapping(value = "/addUser")
-    public String addUser(@RequestBody Map<String,Object> map){
-        return "addUser is ok! \n";
-    }
-
-    // 角色初始化
-    @RequestMapping(value = "/addRole")
-    public String addRole(@RequestBody Map<String,Object> map){
-        return "addRole is ok! \n";
-    }
-
-    // 注解的使用
     @RequiresRoles("admin")
     @RequiresPermissions("create")
     @RequestMapping(value = "/create")
