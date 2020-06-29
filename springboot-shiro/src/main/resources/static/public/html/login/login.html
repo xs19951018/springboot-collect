@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .main label {
+            display: inline-block;
+            width: 60px;
+            text-align: right;
+            padding-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="main" style="width: 50%;margin-left: 300px;">
+        <div><label>用户名:</label><input type="text" name="name"></div>
+        <div><label>密码:</label><input type="text" name="password"></div>
+        <div><label></label><input type="checkbox" name="rememberMe">记住我</div>
+        <div><label></label><button id="login">登录</button></div>
+
+
+</div>
+
+</body>
+
+<script src="/public/js/jquery-1.6.4.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        // 登录
+        $("#login").click(function () {
+            var name = $("input[name='name']").val();
+            var password = $("input[name='password']").val();
+            var rememberMe = $("input[name='rememberMe']").is(":checked");
+
+            $.ajax({
+                type: 'post',
+                data: {
+                    name : name,
+                    password : password,
+                    rememberMe : rememberMe,
+                },
+                dataType: "json",
+                url: '/login',
+                success: function (result) {
+                    console.log(result)
+                }
+            })
+        });
+    })
+
+
+</script>
+
+</html>
