@@ -27,9 +27,9 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         // 获取登录用户名
-        String name = (String) principalCollection.getPrimaryPrincipal();
+        User loginUser = (User) principalCollection.getPrimaryPrincipal();
         // 查询用户
-        User user = loginService.findByName(name);
+        User user = loginService.findByName(loginUser.getName());
         // 添加用户权限
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         for (Role role : user.getRoles()){
@@ -63,7 +63,7 @@ public class MyShiroRealm extends AuthorizingRealm {
             return null;
         }else {
             // 这里验证authenticationToken和simpleAuthenticationInfo的信息
-            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(name,
+            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user,
                     user.getPassword(), getName());
             return simpleAuthenticationInfo;
         }

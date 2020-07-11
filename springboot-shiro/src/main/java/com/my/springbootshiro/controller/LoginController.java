@@ -73,19 +73,20 @@ public class LoginController {
         return "error ok!";
     }
 
-    @RequiresRoles("admin")
+    @RequiresRoles("guest")
     @RequiresPermissions("create")
     @RequestMapping(value = "/create")
     public String create(){
         return "Create success!";
     }
 
-    @RequiresRoles("admin")
+    @RequiresRoles("guest")
     @RequestMapping(value = "/test")
     public String test(){
         return "test!";
     }
 
+    @RequiresPermissions("test")
     @RequestMapping(value = "/test2", method = RequestMethod.POST)
     public String test2(){
         return "test2!";
@@ -94,5 +95,12 @@ public class LoginController {
     @RequestMapping(value = "/user/info")
     public String user(){
         return "userinfo!";
+    }
+
+    @RequestMapping(value = "/findByName")
+    public String findByName(){
+        //User user = loginService.findByName("xsh");
+        loginService.findAll();
+        return "user:xsh";
     }
 }

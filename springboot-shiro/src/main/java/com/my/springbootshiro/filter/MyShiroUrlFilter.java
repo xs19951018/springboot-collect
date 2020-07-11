@@ -5,6 +5,7 @@ import com.my.springbootshiro.domain.Permission;
 import com.my.springbootshiro.domain.Role;
 import com.my.springbootshiro.domain.User;
 import com.my.springbootshiro.repository.UserRepository;
+import com.my.springbootshiro.service.ILoginService;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.slf4j.Logger;
@@ -36,10 +37,10 @@ public class MyShiroUrlFilter extends AccessControlFilter {
         boolean isAuthenticated = subject.isAuthenticated();
         if (isAuthenticated) {
             // 已经登录，判断权限url权限
-            String name = (String) subject.getPrincipal();
+            User user = (User) subject.getPrincipal();
             // 1.查询登录着所有的角色及权限
-            UserRepository userRepository = SpringBeanFactoryUtils.getBean(UserRepository.class);
-            User loginUser = userRepository.findByName(name);
+            ILoginService loginService = SpringBeanFactoryUtils.getBean(ILoginService.class);
+            User loginUser = loginService.findByName(user.getName());
             if (SysContant.SYS_ADMIN.equals(loginUser.getName())) {
                 // 超级管理员直接放权
                 return true;
@@ -68,7 +69,7 @@ public class MyShiroUrlFilter extends AccessControlFilter {
                 if (xRequestedWith != null && "XMLHTTPREQUEST".equals(xRequestedWith.toUpperCase())) {
                     // 是ajax请求,返回json字符串
                     httpResponse.setContentType("text/json; charset=UTF-8");
-                    httpResponse.getWriter().write("{\"success\":false,\"msg\":\"没有资源的访问权限\"}");
+                    httpResponse.getWriter().write("{\"code\":-1,\"msg\":\"没有资源的访问权限\"}");
                 }else {
                     // 普通请求
                     this.saveRequestAndRedirectToLogin(request, response);
