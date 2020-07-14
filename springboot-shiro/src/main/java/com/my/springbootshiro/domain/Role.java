@@ -1,5 +1,7 @@
 package com.my.springbootshiro.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,8 +19,11 @@ public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String roleName;
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @ManyToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
     private User user;
+
+    @JsonIgnoreProperties("role")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.EAGER)
     private List<Permission> permissions;
 }

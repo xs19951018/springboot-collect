@@ -21,7 +21,7 @@ public class LoginServiceImpl implements ILoginService {
     @Autowired
     private UserRepository userRepository;
 
-    @Cacheable(value = "all", key = "user_all")
+    @Cacheable(value = "common", key = "'user_all'")
     @Override
     public List<User> findAll() {
         return userRepository.findAll();

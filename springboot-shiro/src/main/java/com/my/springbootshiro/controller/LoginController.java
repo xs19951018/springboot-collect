@@ -97,10 +97,15 @@ public class LoginController {
         return "userinfo!";
     }
 
+    @RequestMapping(value = "/findAll")
+    public String findAll(){
+        loginService.findAll();
+        return "user:all";
+    }
+
     @RequestMapping(value = "/findByName")
     public String findByName(){
-        //User user = loginService.findByName("xsh");
-        loginService.findAll();
+        User user = loginService.findByName("xsh");
         return "user:xsh";
     }
 }
