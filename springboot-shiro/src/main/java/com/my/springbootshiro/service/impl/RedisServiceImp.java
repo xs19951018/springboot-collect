@@ -1,7 +1,7 @@
 package com.my.springbootshiro.service.impl;
 
+import com.my.springbootshiro.dao.IUserDao;
 import com.my.springbootshiro.domain.User;
-import com.my.springbootshiro.repository.UserRepository;
 import com.my.springbootshiro.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,19 +14,19 @@ import java.util.Optional;
 public class RedisServiceImp implements RedisService {
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserDao userDao;
 
 
     @Cacheable(value = "common", key = "'redis_user_all'")
     @Override
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userDao.findAll();
     }
 
     @Cacheable(value = "common", key = "'permission_'+#name")
     @Override
     public User findByName(String name) {
-        return userRepository.findByName(name);
+        return userDao.findByName(name);
     }
 
 }

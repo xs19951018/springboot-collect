@@ -1,5 +1,6 @@
 package com.my.springbootshiro.repository;
 
+import com.my.springbootshiro.dao.IUserDao;
 import com.my.springbootshiro.domain.User;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -15,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRepositoryTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserDao userDao;
 
     @Test
     void findByName() {
-        User user = userRepository.findByName("xsh");
+        User user = userDao.findByName("xsh");
         Assert.assertNotNull(user);
     }
 }

@@ -18,4 +18,11 @@ public interface ILoginService {
      * @return
      */
     Integer register(User user);
+
+    /**
+     * 通过姓名查询人员权限
+     * @param name
+     * @return
+     */
+    User findPermissionByName(String name);
 }

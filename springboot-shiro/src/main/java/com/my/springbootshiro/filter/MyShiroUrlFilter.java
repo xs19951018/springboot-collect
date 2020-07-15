@@ -40,15 +40,15 @@ public class MyShiroUrlFilter extends AccessControlFilter {
             User user = (User) subject.getPrincipal();
             // 1.查询登录着所有的角色及权限
             ILoginService loginService = SpringBeanFactoryUtils.getBean(ILoginService.class);
-            User loginUser = loginService.findByName(user.getName());
+            User loginUser = loginService.findPermissionByName(user.getName());
             if (SysContant.SYS_ADMIN.equals(loginUser.getName())) {
                 // 超级管理员直接放权
                 return true;
             }
             // 权限集合
             List<String> permissionList = new ArrayList<>();
-            for (Role role : loginUser.getRoles()) {
-                for (Permission permission : role.getPermissions()) {
+            for (Role role : loginUser.getRoleList()) {
+                for (Permission permission : role.getPermissionList()) {
                     permissionList.add(permission.getPermission());
                 }
             }

@@ -1,36 +1,30 @@
 package com.my.springbootshiro.service.impl;
 
-import com.my.springbootshiro.domain.Permission;
-import com.my.springbootshiro.domain.Role;
+import com.my.springbootshiro.dao.IUserDao;
 import com.my.springbootshiro.domain.User;
-import com.my.springbootshiro.repository.RoleRepository;
-import com.my.springbootshiro.repository.UserRepository;
 import com.my.springbootshiro.service.ILoginService;
 import com.my.springbootshiro.utils.ShiroEncryption;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
+import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class LoginServiceImpl implements ILoginService {
 
-    @Autowired
-    private UserRepository userRepository;
+    @Resource
+    private IUserDao userDao;
 
     @Cacheable(value = "common", key = "'user_all'")
     @Override
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userDao.findAll();
     }
 
     @Cacheable(value = "common", key = "'permission_'+#name")
     @Override
     public User findByName(String name) {
-        return userRepository.findByName(name);
+        return userDao.findByName(name);
     }
 
     @Override
@@ -43,7 +37,12 @@ public class LoginServiceImpl implements ILoginService {
         // 2.新增用户，密码进行加密
         String encryptionPwd = ShiroEncryption.shiroMd5Encryption(user.getPassword());
         user.setPassword(encryptionPwd);
-        User save = userRepository.save(user);
+        Integer count = userDao.save(user);
         return 1;
+    }
+
+    @Override
+    public User findPermissionByName(String name) {
+        return userDao.findPermissionByName(name);
     }
 }

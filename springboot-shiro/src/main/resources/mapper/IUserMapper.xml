@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.my.springbootshiro.dao.IUserDAO" >
+<mapper namespace="com.my.springbootshiro.dao.IUserDao" >
+    <resultMap id="BaseResultMap" type="com.my.springbootshiro.domain.User">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+    </resultMap>
+
     <sql id="field">
         id,name,password
     </sql>
@@ -25,17 +31,18 @@
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="password" property="password"/>
-        <collection property="roles" ofType="com.my.springbootshiro.domain.Role" column="roleId">
-            <id column="roleId" property="roleId"/>
+        <collection property="roleList" ofType="com.my.springbootshiro.domain.Role" column="roleId">
+            <id column="roleId" property="id"/>
             <result column="roleName" property="roleName"/>
-            <collection property="permissions" ofType="com.my.springbootshiro.domain.Permission" column="permissionId">
-                <id column="permissionId" property="permissionId"/>
+            <collection property="permissionList" ofType="com.my.springbootshiro.domain.Permission" column="permissionId">
+                <id column="permissionId" property="id"/>
                 <result column="permission" property="permission"/>
+                <result column="url" property="url"/>
             </collection>
         </collection>
     </resultMap>
-    <!--通过id查询人员信息及权限-->
-    <select id="findUserPermissionById" resultMap="fieldInclude_U_R_P" parameterType="String">
+    <!--通过name查询人员信息及权限-->
+    <select id="findPermissionByName" resultMap="fieldInclude_U_R_P" parameterType="String">
         SELECT
             U.ID AS id,
             U.`NAME` AS name,
@@ -43,7 +50,8 @@
             R.ID AS roleId,
             R.ROLE_NAME AS roleName,
             P.ID AS permissionId,
-            P.PERMISSION AS permission
+            P.PERMISSION AS permission,
+            P.URL AS url
         FROM USER U
         LEFT JOIN ROLE R ON U.ID = R.USER_ID
         LEFT JOIN PERMISSION P ON R.ID = P.ROLE_ID

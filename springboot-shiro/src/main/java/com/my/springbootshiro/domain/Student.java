@@ -3,35 +3,35 @@ package com.my.springbootshiro.domain;
 import java.io.Serializable;
 
 public class Student implements Serializable {
-    private String stuUuid;
+    private Integer id;
 
-    private String teaUuid;
+    private String name;
 
-    private String stuName;
+    private Integer sex;
 
     private static final long serialVersionUID = 1L;
 
-    public String getStuUuid() {
-        return stuUuid;
+    public Integer getId() {
+        return id;
     }
 
-    public void setStuUuid(String stuUuid) {
-        this.stuUuid = stuUuid;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getTeaUuid() {
-        return teaUuid;
+    public String getName() {
+        return name;
     }
 
-    public void setTeaUuid(String teaUuid) {
-        this.teaUuid = teaUuid;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getStuName() {
-        return stuName;
+    public Integer getSex() {
+        return sex;
     }
 
-    public void setStuName(String stuName) {
-        this.stuName = stuName;
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
 }

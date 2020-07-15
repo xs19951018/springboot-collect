@@ -29,13 +29,13 @@ public class MyShiroRealm extends AuthorizingRealm {
         // 获取登录用户名
         User loginUser = (User) principalCollection.getPrimaryPrincipal();
         // 查询用户
-        User user = loginService.findByName(loginUser.getName());
+        User user = loginService.findPermissionByName(loginUser.getName());
         // 添加用户权限
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        for (Role role : user.getRoles()){
+        for (Role role : user.getRoleList()){
             //添加角色
             simpleAuthorizationInfo.addRole(role.getRoleName());
-            for (Permission permission : role.getPermissions()){
+            for (Permission permission : role.getPermissionList()){
                 //添加权限
                 simpleAuthorizationInfo.addStringPermission(permission.getPermission());
             }
