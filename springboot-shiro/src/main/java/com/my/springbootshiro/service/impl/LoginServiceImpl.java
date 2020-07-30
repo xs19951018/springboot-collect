@@ -4,24 +4,16 @@ import com.my.springbootshiro.dao.IUserDao;
 import com.my.springbootshiro.domain.User;
 import com.my.springbootshiro.service.ILoginService;
 import com.my.springbootshiro.utils.ShiroEncryption;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class LoginServiceImpl implements ILoginService {
 
-    @Resource
+    @Autowired
     private IUserDao userDao;
 
-    @Cacheable(value = "common", key = "'user_all'")
-    @Override
-    public List<User> findAll() {
-        return userDao.findAll();
-    }
-
-    @Cacheable(value = "common", key = "'permission_'+#name")
     @Override
     public User findByName(String name) {
         return userDao.findByName(name);
@@ -30,7 +22,7 @@ public class LoginServiceImpl implements ILoginService {
     @Override
     public Integer register(User user) {
         // 1.判断当前用户名是否存在
-        User checkUser = findByName(user.getName());
+        User checkUser = userDao.findByName(user.getName());
         if (checkUser != null) {
             return 0;
         }

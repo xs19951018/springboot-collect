@@ -31,7 +31,7 @@ public class CacheConfig  {
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer())).disableCachingNullValues();
         Map<String, RedisCacheConfiguration> redisCacheConfigurationMap = new HashMap<>();
         //entryTtl设置缓存失效时间，单位是秒
-        redisCacheConfigurationMap.put("common", userCacheConfiguration.entryTtl(Duration.ofSeconds(30)));
+        redisCacheConfigurationMap.put("common", userCacheConfiguration.entryTtl(Duration.ofSeconds(120)));
 
         //设置CacheManager的值序列化方式为JdkSerializationRedisSerializer,但其实RedisCacheConfiguration默认就是使用StringRedisSerializer序列化key，JdkSerializationRedisSerializer序列化value,所以以下注释代码为默认实现
         //ClassLoader loader = this.getClass().getClassLoader();

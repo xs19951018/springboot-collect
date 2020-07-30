@@ -23,9 +23,17 @@
         #{password,jdbcType=VARCHAR}
     </sql>
 
-    <insert id="insert" parameterType="com.my.springbootshiro.domain.User">
-        INSERT INTO ACCOUNT(<include refid="field" />) VALUES (<include refid="property" />)
+    <insert id="save" parameterType="User">
+        INSERT INTO USER(name,password) VALUES (#{name,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR})
     </insert>
+    <select id="findAll" resultType="User">
+        SELECT <include refid="field" /> FROM USER
+    </select>
+    <select id="findByName" resultType="User" parameterType="String">
+        SELECT <include refid="field" />
+        FROM USER
+        WHERE NAME = #{name}
+    </select>
 
     <resultMap type="com.my.springbootshiro.domain.User" id="fieldInclude_U_R_P">
         <id column="id" property="id"/>

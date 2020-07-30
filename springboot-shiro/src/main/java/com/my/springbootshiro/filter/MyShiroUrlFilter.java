@@ -4,8 +4,8 @@ import com.my.springbootshiro.constant.SysContant;
 import com.my.springbootshiro.domain.Permission;
 import com.my.springbootshiro.domain.Role;
 import com.my.springbootshiro.domain.User;
-import com.my.springbootshiro.repository.UserRepository;
 import com.my.springbootshiro.service.ILoginService;
+import com.my.springbootshiro.service.IUserService;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class MyShiroUrlFilter extends AccessControlFilter {
             // 已经登录，判断权限url权限
             User user = (User) subject.getPrincipal();
             // 1.查询登录着所有的角色及权限
-            ILoginService loginService = SpringBeanFactoryUtils.getBean(ILoginService.class);
+            IUserService loginService = SpringBeanFactoryUtils.getBean(IUserService.class);
             User loginUser = loginService.findPermissionByName(user.getName());
             if (SysContant.SYS_ADMIN.equals(loginUser.getName())) {
                 // 超级管理员直接放权

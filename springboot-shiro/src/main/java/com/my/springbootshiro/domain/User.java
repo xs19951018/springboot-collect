@@ -1,17 +1,13 @@
 package com.my.springbootshiro.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+
 import java.io.Serializable;
 import java.util.List;
 
-@Entity
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
@@ -53,5 +49,14 @@ public class User implements Serializable {
 
     public void setRoleList(List<Role> roleList) {
         this.roleList = roleList;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
