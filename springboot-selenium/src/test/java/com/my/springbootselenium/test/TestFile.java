@@ -1,5 +1,9 @@
 package com.my.springbootselenium.test;
 
+import com.my.springbootselenium.util.FileHepler;
+import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
 import java.io.File;
 
 public class TestFile {
@@ -13,4 +17,12 @@ public class TestFile {
         System.out.println(path.replaceAll("/", "\\\\"));
 
     }
+
+    @Test
+    void downloadVideo() {
+        FileHepler fileHepler = new FileHepler();
+        String url = "https://news.cctv.com/";
+        fileHepler.downloadFronInet(url);
+    }
+
 }
