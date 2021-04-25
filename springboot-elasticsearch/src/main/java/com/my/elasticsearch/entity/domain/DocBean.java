@@ -11,7 +11,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-@Document(indexName = "ems",type = "_doc", shards = 1, replicas = 0)
+//@Document(indexName = "ems",type = "_doc", shards = 1, replicas = 0)
 public class DocBean {
 
     @Id

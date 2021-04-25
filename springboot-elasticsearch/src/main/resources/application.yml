@@ -49,3 +49,10 @@ mybatis-plus:
 logging:
   level:
     com.my.elasticsearch: debug
+
+# elasticsearch 检索
+elastic:
+  address: 127.0.0.1
+  username:
+  password:
+  tables: springboot_origin.user

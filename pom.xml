@@ -64,10 +64,52 @@
             </dependency>
             <!-- springboot 集成 elasticsearch -->
             <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-elasticsearch</artifactId>
-                <version>4.0.0.RELEASE</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+                <version>2.3.0.RELEASE</version>
             </dependency>
+            <!-- mysql 数据同步 -->
+            <dependency>
+                <groupId>com.alibaba.otter</groupId>
+                <artifactId>canal.client</artifactId>
+                <version>1.1.2</version>
+            </dependency>
+
+            <!--swagger-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>2.9.2</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>2.9.2</version>
+            </dependency>
+
+            <!-- hibernate 参数校验 -->
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>6.0.7.Final</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.8.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>4.4</version>
+            </dependency>
+            <dependency>
+                <groupId>ma.glasnost.orika</groupId>
+                <artifactId>orika-core</artifactId>
+                <version>1.5.4</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

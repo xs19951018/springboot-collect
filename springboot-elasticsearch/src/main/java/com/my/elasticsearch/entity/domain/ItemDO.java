@@ -1,23 +1,17 @@
 package com.my.elasticsearch.entity.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.data.elasticsearch.annotations.Document;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
 @ToString
-@TableName("item")
-@Document(indexName = "item", type = "item")
+//@Document(indexName = "item", type = "item")
 public class ItemDO {
 
     /** 主键 */
-    @TableId(type = IdType.AUTO)
     private Long id;
 
     /** 是否删除：1(删除) 0(未删除) */
