@@ -9,14 +9,10 @@
     </parent>
 
     <groupId>com.my</groupId>
-    <artifactId>elasticsearch</artifactId>
+    <artifactId>canal</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>elasticsearch</name>
+    <name>canal</name>
     <packaging>jar</packaging>
-
-    <properties>
-        <elasticsearch.version>6.4.3</elasticsearch.version>
-    </properties>
 
     <dependencies>
         <!-- 依赖公共module -->
@@ -36,15 +32,27 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+
         <!-- springboot 集成 elasticsearch(全文检索) -->
         <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-client</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
-        <!-- Java High Level REST Client -->
+
+        <!-- mysql 数据同步 -->
         <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <groupId>com.alibaba.otter</groupId>
+            <artifactId>canal.client</artifactId>
         </dependency>
 
     </dependencies>

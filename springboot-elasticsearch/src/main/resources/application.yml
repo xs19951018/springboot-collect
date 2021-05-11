@@ -1,58 +1,6 @@
 server:
   port: 8103
 
-spring:
-  elasticsearch:
-    rest:
-      uris: http://localhost:9200
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/springboot_origin?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
-    # 连接池的配置信息
-    # 初始化大小，最小，最大
-    initialSize: 2
-    minIdle: 2
-    maxActive: 20
-    # 配置获取连private List<FaceInfoKxDTO> faces;接等待超时的时间
-    maxWait: 60000
-    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-    timeBetweenEvictionRunsMillis: 60000
-    # 配置一个连接在池中最小生存的时间，单位是毫秒
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    # 打开PSCache，并且指定每个连接上PSCache的大小
-    poolPreparedStatements: true
-    maxPoolPreparedStatementPerConnectionSize: 20
-    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-    filters: stat,wall,log4j
-    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-    connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
-    tomcat:
-      init-s-q-l: SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci
-  servlet:
-    multipart:
-      enabled: true
-      max-file-size: 1024MB
-      max-request-size: 1024MB
-
-mybatis-plus:
-  configuration:
-    # 是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN（下划线命名） 到经典 Java 属性名 aColumn（驼峰命名） 的类似映射
-    map-underscore-to-camel-case: true
-
-logging:
-  level:
-    com.my.elasticsearch: debug
-
 # elasticsearch 检索
-elastic:
-  address: 127.0.0.1
-  username:
-  password:
-  tables: springboot_origin.user
+elasticsearch:
+  hosts: 192.168.80.131:9200

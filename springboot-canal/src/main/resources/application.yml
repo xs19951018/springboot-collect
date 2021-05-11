@@ -1,0 +1,9 @@
+server:
+  port: 8103
+
+spring:
+  profiles:
+    active: canal
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200

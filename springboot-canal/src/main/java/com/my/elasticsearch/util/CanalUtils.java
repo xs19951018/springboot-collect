@@ -22,7 +22,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -32,15 +31,15 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * canal：mysql数据同步
+ * canal增量同步
  */
 @Slf4j
 @Component
 public class CanalUtils {
 
-    @Value("${elastic.address}")
+//    @Value("${elastic.client.host}")
     private String address;
-    @Value("${elastic.tables}")
+//    @Value("${elastic.tables}")
     private String tables;
     private CanalConnector canalConnector;
     @Autowired
